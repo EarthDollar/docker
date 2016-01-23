@@ -1,0 +1,30 @@
+data:
+  image: busybox:latest
+  volumes:
+    - /data:/root/.expanse
+  command: /bin/echo
+
+bootstrap:
+  build: .
+  container_name: bootstrap
+  volumes_from:
+    - data
+  entrypoint: /root/start.sh
+  command: "--rpc --rpcaddr '0.0.0.0' --verbosity '5' --bootnodes 'enode://f6f0d6b9b7d02ec9e8e4a16e38675f3621ea5e69860c739a65c1597ca28aefb3cec7a6d84e471ac927d42a1b64c1cbdefad75e7ce8872d57548ddcece20afdd1@159.203.64.95:42786'"
+  ports:
+    - "127.0.0.1:42786:42786"
+    - "127.0.0.1:42786:42786/udp"
+
+exp:
+  build: .
+  links: 
+    - bootstrap
+  entrypoint: /root/start.sh
+  command: "--rpc --rpcaddr '0.0.0.0'"
+
+miner:
+  build: .
+  links: 
+    - bootstrap
+  entrypoint: /root/start.sh
+  command: "--rpc --rpcaddr '0.0.0.0' --mine"
