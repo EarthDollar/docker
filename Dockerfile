@@ -33,3 +33,5 @@ RUN cp /build/bin/ged /usr/bin/ged
 EXPOSE 20203
 EXPOSE 20201
 
+ENTRYPOINT ["/usr/bin/ged"]
+
