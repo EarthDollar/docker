@@ -1,1 +1,1 @@
-# expanse-docker
+# earthdollar-docker
