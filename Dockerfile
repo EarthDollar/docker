@@ -28,10 +28,10 @@ ENV PATH $GOROOT/bin:$GOPATH/bin:$PATH
 RUN git clone http://www.github.com/Earthdollar/go-earthdollar.git
 RUN cd go-earthdollar && make ged
 
-#RUN sudo cp /build/bin/ged /usr/bin/ged
+RUN cp /go-earthdollar/build/bin/ged /usr/bin/ged
 
 EXPOSE 20203
 EXPOSE 20201
 
-ENTRYPOINT ["/build/bin/ged"]
+ENTRYPOINT ["/usr/bin/ged"]
 
